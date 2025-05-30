@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Educational Platform - Top Navbar</title>
+  <title>Top Menu Layout</title>
   <style>
     * {
       margin: 0;
@@ -12,116 +12,74 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: system-ui, sans-serif;
       background: #f8fafc;
-      color: #334155;
-      line-height: 1.6;
+      color: #1e293b;
     }
 
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Top Navbar Header */
     .header {
       background: #1e293b;
       color: white;
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-    }
-
-    .header h1 {
+      padding: 1rem 2rem;
       font-size: 1.25rem;
-      padding: 1rem 0;
     }
 
-    .nav {
+    .menu-bar {
+      background: #334155;
       display: flex;
-      gap: 1.5rem;
+      padding: 0;
+      gap: 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .menu-item {
       position: relative;
     }
 
-    .nav-section {
-      position: relative;
-    }
-
-    .nav-item {
+    .menu-button {
+      padding: 1rem 1.5rem;
+      color: white;
       background: none;
       border: none;
-      color: white;
-      font-weight: 500;
-      font-size: 0.95rem;
       cursor: pointer;
-      padding: 1rem 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 1rem;
     }
 
-    .nav-item:hover,
-    .nav-item.active {
-      color: #3b82f6;
+    .menu-button:hover {
+      background: #475569;
     }
 
-    .submenu, .nested-submenu {
+    .submenu {
       display: none;
       position: absolute;
-      background: white;
-      color: #334155;
       top: 100%;
       left: 0;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      z-index: 1000;
+      background: white;
+      color: #1e293b;
       min-width: 200px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .submenu.expanded,
-    .nested-submenu.expanded {
+    .submenu a {
       display: block;
-    }
-
-    .submenu-item, .nested-submenu-item {
-      display: block;
-      padding: 0.75rem 1.25rem;
-      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
       text-decoration: none;
-      color: #334155;
-      white-space: nowrap;
+      color: #1e293b;
+      font-size: 0.95rem;
     }
 
-    .submenu-item:hover, .nested-submenu-item:hover {
+    .submenu a:hover {
       background: #f1f5f9;
-      color: #3b82f6;
+      color: #2563eb;
     }
 
-    .submenu .level-2 {
-      position: relative;
-    }
-
-    .nested-submenu {
-      left: 100%;
-      top: 0;
-      min-width: 180px;
-    }
-
-    .chevron {
-      font-size: 0.8rem;
+    .menu-item:hover .submenu {
+      display: block;
     }
 
     .content {
-      flex: 1;
       padding: 2rem;
-      background: white;
-      margin: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
     .breadcrumb {
@@ -132,121 +90,53 @@
       font-size: 0.9rem;
       color: #64748b;
     }
-
-    .mobile-toggle {
-      display: none;
-    }
-
-    @media (max-width: 768px) {
-      .nav {
-        flex-direction: column;
-        background: #1e293b;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        display: none;
-      }
-
-      .nav.open {
-        display: flex;
-      }
-
-      .mobile-toggle {
-        display: block;
-        background: #3b82f6;
-        color: white;
-        border: none;
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
-        cursor: pointer;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="header">
-      <h1>🏠 Educational Platform</h1>
-      <button class="mobile-toggle" onclick="toggleMobileNav()">☰</button>
-      <nav class="nav" id="navbar">
-        <!-- Example Menu -->
-        <div class="nav-section">
-          <button class="nav-item" onclick="toggleSubmenu(event, 'dashboard-menu')">📊 Dashboard</button>
-          <div class="submenu" id="dashboard-menu">
-            <a class="submenu-item" onclick="setActiveContent('My Courses', 'Dashboard > My Courses')">My Courses</a>
-            <a class="submenu-item" onclick="setActiveContent('Activities', 'Dashboard > Activities')">Activities</a>
-            <a class="submenu-item" onclick="setActiveContent('My Profile', 'Dashboard > My Profile')">My Profile</a>
-          </div>
-        </div>
 
-        <div class="nav-section">
-          <button class="nav-item" onclick="toggleSubmenu(event, 'courses-menu')">📚 Courses</button>
-          <div class="submenu" id="courses-menu">
-            <a class="submenu-item" onclick="setActiveContent('Projects', 'Courses > Projects')">Projects</a>
-            <a class="submenu-item" onclick="setActiveContent('Assignments', 'Courses > Assignments')">Assignments</a>
-          </div>
-        </div>
+  <div class="header">🏫 Educational Platform</div>
 
-        <div class="nav-section">
-          <button class="nav-item" onclick="toggleSubmenu(event, 'community-menu')">🤝 Community</button>
-          <div class="submenu" id="community-menu">
-            <div class="submenu-item level-2" onmouseenter="toggleNestedSubmenu('study-groups')" onmouseleave="toggleNestedSubmenu('study-groups')">
-              Study Groups
-              <div class="nested-submenu" id="study-groups">
-                <a class="nested-submenu-item" onclick="setActiveContent('Join/Create Group', 'Community > Study Groups > Join/Create Group')">Join/Create Group</a>
-                <a class="nested-submenu-item" onclick="setActiveContent('Group Chat', 'Community > Study Groups > Group Chat')">Group Chat</a>
-              </div>
-            </div>
-            <a class="submenu-item" onclick="setActiveContent('Events', 'Community > Events')">Events</a>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <main class="content">
-      <div class="breadcrumb" id="breadcrumb">Home</div>
-      <h2 id="content-title">Welcome to Your Educational Platform</h2>
-      <div class="content-placeholder">
-        <p><strong>Click on any menu item</strong> to update the content.</p>
+  <nav class="menu-bar">
+    <div class="menu-item">
+      <button class="menu-button">Dashboard</button>
+      <div class="submenu">
+        <a href="#" onclick="setContent('Dashboard > My Courses')">My Courses</a>
+        <a href="#" onclick="setContent('Dashboard > Activities')">Activities</a>
+        <a href="#" onclick="setContent('Dashboard > My Profile')">My Profile</a>
       </div>
-    </main>
-  </div>
+    </div>
+
+    <div class="menu-item">
+      <button class="menu-button">Courses</button>
+      <div class="submenu">
+        <a href="#" onclick="setContent('Courses > Projects')">Projects</a>
+        <a href="#" onclick="setContent('Courses > Assignments')">Assignments</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button class="menu-button">Community</button>
+      <div class="submenu">
+        <a href="#" onclick="setContent('Community > Study Groups')">Study Groups</a>
+        <a href="#" onclick="setContent('Community > Events')">Events</a>
+      </div>
+    </div>
+
+    <!-- Add more top-level menu items here as needed -->
+  </nav>
+
+  <main class="content">
+    <div class="breadcrumb" id="breadcrumb">Home</div>
+    <h2 id="content-title">Welcome to Your Educational Platform</h2>
+    <p>Select a menu item to view its content.</p>
+  </main>
 
   <script>
-    function toggleSubmenu(event, menuId) {
-      event.stopPropagation();
-      document.querySelectorAll('.submenu').forEach(menu => {
-        if (menu.id !== menuId) menu.classList.remove('expanded');
-      });
-      const menu = document.getElementById(menuId);
-      menu.classList.toggle('expanded');
+    function setContent(breadcrumbText) {
+      document.getElementById('breadcrumb').textContent = breadcrumbText;
+      document.getElementById('content-title').textContent = breadcrumbText.split(' > ').pop();
     }
-
-    function toggleNestedSubmenu(menuId) {
-      document.querySelectorAll('.nested-submenu').forEach(menu => {
-        if (menu.id !== menuId) menu.classList.remove('expanded');
-      });
-      const menu = document.getElementById(menuId);
-      menu.classList.toggle('expanded');
-    }
-
-    function setActiveContent(title, breadcrumb) {
-      document.getElementById('content-title').textContent = title;
-      document.getElementById('breadcrumb').textContent = breadcrumb;
-      document.querySelectorAll('.submenu').forEach(m => m.classList.remove('expanded'));
-      document.getElementById('navbar').classList.remove('open');
-    }
-
-    function toggleMobileNav() {
-      const nav = document.getElementById('navbar');
-      nav.classList.toggle('open');
-    }
-
-    // Close menus on outside click
-    document.addEventListener('click', () => {
-      document.querySelectorAll('.submenu, .nested-submenu').forEach(m => m.classList.remove('expanded'));
-    });
   </script>
+
 </body>
 </html>
