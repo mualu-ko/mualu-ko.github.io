@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Platform - Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: #1e293b;
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 320px;
+            background: white;
+            border-right: 1px solid #e2e8f0;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-section {
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-item:hover {
+            background: #f8fafc;
+            color: #3b82f6;
+        }
+
+        .nav-item.active {
+            background: #eff6ff;
+            color: #2563eb;
+            border-right: 3px solid #3b82f6;
+        }
+
+        .nav-icon {
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .chevron {
+            transition: transform 0.2s ease;
+            color: #94a3b8;
+        }
+
+        .chevron.expanded {
+            transform: rotate(90deg);
+        }
+
+        /* Submenu */
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #f8fafc;
+        }
+
+        .submenu.expanded {
+            max-height: 500px;
+        }
+
+        .submenu-item {
+            display: block;
+            padding: 0.75rem 1.5rem 0.75rem 3.5rem;
+            color: #64748b;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            border-left: 3px solid transparent;
+        }
+
+        .submenu-item:hover {
+            background: #e2e8f0;
+            color: #3b82f6;
+            border-left-color: #3b82f6;
+        }
+
+        /* Nested submenu for Study Groups */
+        .nested-submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #f1f5f9;
+        }
+
+        .nested-submenu.expanded {
+            max-height: 200px;
+        }
+
+        .nested-submenu-item {
+            display: block;
+            padding: 0.5rem 1.5rem 0.5rem 4.5rem;
+            color: #64748b;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+            border-left: 2px solid transparent;
+        }
+
+        .nested-submenu-item:hover {
+            background: #e2e8f0;
+            color: #3b82f6;
+            border-left-color: #3b82f6;
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            padding: 2rem;
+            background: white;
+            margin: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .content h2 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+        }
+
+        .content-placeholder {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            color: #64748b;
+            margin: 2rem 0;
+        }
+
+        .breadcrumb {
+            background: #f1f5f9;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* Mobile Toggle */
+        .mobile-toggle {
+            display: none;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1000;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                z-index: 999;
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .content {
+                margin: 0.5rem;
+                padding: 1rem;
+            }
+
+            .header {
+                padding-left: 4rem;
+            }
+        }
+
+        /* Visual indicators */
+        .level-indicator {
+            width: 3px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .level-1 { border-left: 3px solid #3b82f6; }
+        .level-2 { border-left: 3px solid #10b981; }
+        .level-3 { border-left: 3px solid #f59e0b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🏠 Educational Platform</h1>
+        </header>
+
+        <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+
+        <div class="main-layout">
+            <nav class="sidebar" id="sidebar">
+                <!-- Dashboard -->
+                <div class="nav-section">
+                    <button class="nav-item level-1" onclick="toggleSubmenu(this, 'dashboard-menu')">
+                        <span><span class="nav-icon">📊</span>Dashboard</span>
+                        <span class="chevron">›</span>
+                    </button>
+                    <div class="submenu" id="dashboard-menu">
+                        <a href="#" class="submenu-item" onclick="setActiveContent('My Courses', 'Dashboard > My Courses')">My Courses</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Activities', 'Dashboard > Activities')">Activities</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('My Profile', 'Dashboard > My Profile')">My Profile</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('To-Do', 'Dashboard > To-Do')">To-Do</a>
+                    </div>
+                </div>
+
+                <!-- Courses -->
+                <div class="nav-section">
+                    <button class="nav-item level-1" onclick="toggleSubmenu(this, 'courses-menu')">
+                        <span><span class="nav-icon">📚</span>Courses</span>
+                        <span class="chevron">›</span>
+                    </button>
+                    <div class="submenu" id="courses-menu">
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Projects', 'Courses > Projects')">Projects</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Assignments', 'Courses > Assignments')">Assignments</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Feedback', 'Courses > Feedback')">Feedback</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Progress', 'Courses > Progress')">Progress</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Overview', 'Courses > Overview')">Overview</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Materials', 'Courses > Materials')">Materials</a>
+                    </div>
+                </div>
+
+                <!-- Community -->
+                <div class="nav-section">
+                    <button class="nav-item level-1" onclick="toggleSubmenu(this, 'community-menu')">
+                        <span><span class="nav-icon">🤝</span>Community</span>
+                        <span class="chevron">›</span>
+                    </button>
+                    <div class="submenu" id="community-menu">
+                        <button class="submenu-item level-2" onclick="toggleNestedSubmenu(this, 'study-groups-menu')" style="background: none; border: none; cursor: pointer; width: 100%; text-align: left;">
+                            <span>Study Groups</span>
+                            <span class="chevron" style="float: right;">›</span>
+                        </button>
+                        <div class="nested-submenu" id="study-groups-menu">
+                            <a href="#" class="nested-submenu-item" onclick="setActiveContent('Join/Create Group', 'Community > Study Groups > Join/Create Group')">Join/Create Group</a>
+                            <a href="#" class="nested-submenu-item" onclick="setActiveContent('Group Chat', 'Community > Study Groups > Group Chat')">Group Chat</a>
+                            <a href="#" class="nested-submenu-item" onclick="setActiveContent('Workspace', 'Community > Study Groups > Workspace')">Workspace</a>
+                        </div>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Events', 'Community > Events')">Events</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Discussions', 'Community > Discussions')">Discussions</a>
+                    </div>
+                </div>
+
+                <!-- Mentorship -->
+                <div class="nav-section">
+                    <button class="nav-item level-1" onclick="toggleSubmenu(this, 'mentorship-menu')">
+                        <span><span class="nav-icon">👨‍🏫</span>Mentorship</span>
+                        <span class="chevron">›</span>
+                    </button>
+                    <div class="submenu" id="mentorship-menu">
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Office Hours', 'Mentorship > Office Hours')">Office Hours</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Help Centre', 'Mentorship > Help Centre')">Help Centre</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Chat Tutor', 'Mentorship > Chat Tutor')">Chat Tutor</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Find Mentor', 'Mentorship > Find Mentor')">Find Mentor</a>
+                    </div>
+                </div>
+
+                <!-- Tools -->
+                <div class="nav-section">
+                    <button class="nav-item level-1" onclick="toggleSubmenu(this, 'tools-menu')">
+                        <span><span class="nav-icon">🛠️</span>Tools</span>
+                        <span class="chevron">›</span>
+                    </button>
+                    <div class="submenu" id="tools-menu">
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Whiteboard', 'Tools > Whiteboard')">Whiteboard</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Meetings', 'Tools > Meetings')">Meetings</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Collaboration', 'Tools > Collaboration')">Collaboration</a>
+                    </div>
+                </div>
+
+                <!-- Resources -->
+                <div class="nav-section">
+                    <button class="nav-item level-1" onclick="toggleSubmenu(this, 'resources-menu')">
+                        <span><span class="nav-icon">📖</span>Resources</span>
+                        <span class="chevron">›</span>
+                    </button>
+                    <div class="submenu" id="resources-menu">
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Library', 'Resources > Library')">Library</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Readings', 'Resources > Readings')">Readings</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Videos', 'Resources > Videos')">Videos</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Journal', 'Resources > Journal')">Journal</a>
+                    </div>
+                </div>
+
+                <!-- Settings -->
+                <div class="nav-section">
+                    <button class="nav-item level-1" onclick="toggleSubmenu(this, 'settings-menu')">
+                        <span><span class="nav-icon">⚙️</span>Settings</span>
+                        <span class="chevron">›</span>
+                    </button>
+                    <div class="submenu" id="settings-menu">
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Edit Profile', 'Settings > Edit Profile')">Edit Profile</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Notifications', 'Settings > Notifications')">Notifications</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Language', 'Settings > Language')">Language</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Support', 'Settings > Support')">Support</a>
+                    </div>
+                </div>
+
+                <!-- Admin -->
+                <div class="nav-section">
+                    <button class="nav-item level-1" onclick="toggleSubmenu(this, 'admin-menu')">
+                        <span><span class="nav-icon">👑</span>Admin</span>
+                        <span class="chevron">›</span>
+                    </button>
+                    <div class="submenu" id="admin-menu">
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Instructor Boards', 'Admin > Instructor Boards')">Instructor Boards</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Manage Courses', 'Admin > Manage Courses')">Manage Courses</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Add Content', 'Admin > Add Content')">Add Content</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Analytics', 'Admin > Analytics')">Analytics</a>
+                        <a href="#" class="submenu-item" onclick="setActiveContent('Submissions', 'Admin > Submissions')">Submissions</a>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="content">
+                <div class="breadcrumb" id="breadcrumb">Home</div>
+                <h2 id="content-title">Welcome to Your Educational Platform</h2>
+                <div class="content-placeholder">
+                    <p><strong>Click on any navigation item</strong> to see the content area update.</p>
+                    <p>This wireframe demonstrates the hierarchical navigation structure with:</p>
+                    <ul style="text-align: left; display: inline-block; margin-top: 1rem;">
+                        <li>Expandable accordion menus</li>
+                        <li>Visual hierarchy indicators</li>
+                        <li>Responsive mobile design</li>
+                        <li>Nested Study Groups functionality</li>
+                        <li>Breadcrumb navigation</li>
+                    </ul>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function toggleSubmenu(button, menuId) {
+            const menu = document.getElementById(menuId);
+            const chevron = button.querySelector('.chevron');
+            const isExpanded = menu.classList.contains('expanded');
+            
+            // Close all other submenus
+            document.querySelectorAll('.submenu.expanded').forEach(sub => {
+                if (sub.id !== menuId) {
+                    sub.classList.remove('expanded');
+                    const otherButton = document.querySelector(`[onclick*="${sub.id}"]`);
+                    if (otherButton) {
+                        otherButton.querySelector('.chevron').classList.remove('expanded');
+                        otherButton.classList.remove('active');
+                    }
+                }
+            });
+            
+            // Toggle current submenu
+            if (isExpanded) {
+                menu.classList.remove('expanded');
+                chevron.classList.remove('expanded');
+                button.classList.remove('active');
+            } else {
+                menu.classList.add('expanded');
+                chevron.classList.add('expanded');
+                button.classList.add('active');
+            }
+        }
+
+        function toggleNestedSubmenu(button, menuId) {
+            const menu = document.getElementById(menuId);
+            const chevron = button.querySelector('.chevron');
+            const isExpanded = menu.classList.contains('expanded');
+            
+            if (isExpanded) {
+                menu.classList.remove('expanded');
+                chevron.classList.remove('expanded');
+            } else {
+                menu.classList.add('expanded');
+                chevron.classList.add('expanded');
+            }
+        }
+
+        function setActiveContent(title, breadcrumb) {
+            document.getElementById('content-title').textContent = title;
+            document.getElementById('breadcrumb').textContent = breadcrumb;
+            
+            // Close sidebar on mobile after selection
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('open');
+            }
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.mobile-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(event.target) && 
+                !toggle.contains(event.target) &&
+                sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
