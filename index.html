@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Top Menu Layout</title>
+  <title>Education Platform Menu</title>
   <style>
     * {
       margin: 0;
@@ -27,8 +27,9 @@
     .menu-bar {
       background: #334155;
       display: flex;
-      padding: 0;
-      gap: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0 1rem;
       position: relative;
       z-index: 10;
     }
@@ -38,7 +39,7 @@
     }
 
     .menu-button {
-      padding: 1rem 1.5rem;
+      padding: 1rem 1rem;
       color: white;
       background: none;
       border: none;
@@ -59,6 +60,7 @@
       color: #1e293b;
       min-width: 200px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      z-index: 999;
     }
 
     .submenu a {
@@ -97,32 +99,99 @@
   <div class="header">🏫 Educational Platform</div>
 
   <nav class="menu-bar">
+
+    <!-- Dashboard -->
     <div class="menu-item">
-      <button class="menu-button">Dashboard</button>
+      <button class="menu-button">📊 Dashboard</button>
       <div class="submenu">
         <a href="#" onclick="setContent('Dashboard > My Courses')">My Courses</a>
         <a href="#" onclick="setContent('Dashboard > Activities')">Activities</a>
         <a href="#" onclick="setContent('Dashboard > My Profile')">My Profile</a>
+        <a href="#" onclick="setContent('Dashboard > To-Do')">To-Do</a>
       </div>
     </div>
 
+    <!-- Courses -->
     <div class="menu-item">
-      <button class="menu-button">Courses</button>
+      <button class="menu-button">📚 Courses</button>
       <div class="submenu">
         <a href="#" onclick="setContent('Courses > Projects')">Projects</a>
         <a href="#" onclick="setContent('Courses > Assignments')">Assignments</a>
+        <a href="#" onclick="setContent('Courses > Feedback')">Feedback</a>
+        <a href="#" onclick="setContent('Courses > Progress')">Progress</a>
+        <a href="#" onclick="setContent('Courses > Overview')">Overview</a>
+        <a href="#" onclick="setContent('Courses > Materials')">Materials</a>
       </div>
     </div>
 
+    <!-- Community -->
     <div class="menu-item">
-      <button class="menu-button">Community</button>
+      <button class="menu-button">🤝 Community</button>
       <div class="submenu">
         <a href="#" onclick="setContent('Community > Study Groups')">Study Groups</a>
+        <a href="#" onclick="setContent('Community > Join/Create Group')">Join/Create Group</a>
+        <a href="#" onclick="setContent('Community > Group Chat')">Group Chat</a>
+        <a href="#" onclick="setContent('Community > Workspace')">Workspace</a>
         <a href="#" onclick="setContent('Community > Events')">Events</a>
+        <a href="#" onclick="setContent('Community > Discussions')">Discussions</a>
       </div>
     </div>
 
-    <!-- Add more top-level menu items here as needed -->
+    <!-- Mentorship -->
+    <div class="menu-item">
+      <button class="menu-button">👨‍🏫 Mentorship</button>
+      <div class="submenu">
+        <a href="#" onclick="setContent('Mentorship > Office Hours')">Office Hours</a>
+        <a href="#" onclick="setContent('Mentorship > Help Centre')">Help Centre</a>
+        <a href="#" onclick="setContent('Mentorship > Chat Tutor')">Chat Tutor</a>
+        <a href="#" onclick="setContent('Mentorship > Find Mentor')">Find Mentor</a>
+      </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="menu-item">
+      <button class="menu-button">🛠️ Tools</button>
+      <div class="submenu">
+        <a href="#" onclick="setContent('Tools > Whiteboard')">Whiteboard</a>
+        <a href="#" onclick="setContent('Tools > Meetings')">Meetings</a>
+        <a href="#" onclick="setContent('Tools > Collaboration')">Collaboration</a>
+      </div>
+    </div>
+
+    <!-- Resources -->
+    <div class="menu-item">
+      <button class="menu-button">📖 Resources</button>
+      <div class="submenu">
+        <a href="#" onclick="setContent('Resources > Library')">Library</a>
+        <a href="#" onclick="setContent('Resources > Readings')">Readings</a>
+        <a href="#" onclick="setContent('Resources > Videos')">Videos</a>
+        <a href="#" onclick="setContent('Resources > Journal')">Journal</a>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="menu-item">
+      <button class="menu-button">⚙️ Settings</button>
+      <div class="submenu">
+        <a href="#" onclick="setContent('Settings > Edit Profile')">Edit Profile</a>
+        <a href="#" onclick="setContent('Settings > Notifications')">Notifications</a>
+        <a href="#" onclick="setContent('Settings > Language')">Language</a>
+        <a href="#" onclick="setContent('Settings > Support')">Support</a>
+      </div>
+    </div>
+
+    <!-- Admin -->
+    <div class="menu-item">
+      <button class="menu-button">👑 Admin</button>
+      <div class="submenu">
+        <a href="#" onclick="setContent('Admin > Instructor Boards')">Instructor Boards</a>
+        <a href="#" onclick="setContent('Admin > Manage Courses')">Manage Courses</a>
+        <a href="#" onclick="setContent('Admin > Add Content')">Add Content</a>
+        <a href="#" onclick="setContent('Admin > Analytics')">Analytics</a>
+        <a href="#" onclick="setContent('Admin > Submissions')">Submissions</a>
+      </div>
+    </div>
+
   </nav>
 
   <main class="content">
